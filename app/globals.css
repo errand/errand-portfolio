@@ -5,7 +5,7 @@
 
 @layer base {
   body {
-    @apply bg-gray-200 dark:bg-gray-800;
+    @apply bg-gray-200 dark:bg-gray-800 dark:text-gray-50;
   }
 }
 
@@ -15,7 +15,7 @@
     @apply text-3xl lg:text-7xl font-black mb-2;
   }
   h2, .h2 {
-    @apply text-5xl uppercase tracking-widest font-thin;
+    @apply text-xl lg:text-5xl uppercase tracking-widest font-thin;
   }
   .text-balance {
     text-wrap: balance;
