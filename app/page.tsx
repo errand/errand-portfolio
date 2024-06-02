@@ -42,6 +42,7 @@ export default function Home() {
                   transition={{ duration: 1, delay: 0.5}}
               >
                   <Link href={'https://www.linkedin.com/in/aleksandr-shatskikh'} target={'_blank'} rel={'nofollow'}>
+                      {/*@ts-ignore*/}
                       <FaLinkedin className={'h-10 w-10'} />
                   </Link>
               </motion.span>
@@ -55,6 +56,7 @@ export default function Home() {
                   transition={{ duration: 1, delay: 1 }}
               >
                   <Link href={'https://github.com/errand'} target={'_blank'} rel={'nofollow'}>
+                      {/*@ts-ignore*/}
                       <FaGithub className={'h-10 w-10'} />
                   </Link>
               </motion.span>
@@ -68,6 +70,7 @@ export default function Home() {
                   transition={{ duration: 1, delay: 1.5 }}
               >
                   <Link href={'https://t.me/mrerrand'} target={'_blank'} rel={'nofollow'}>
+                      {/*@ts-ignore*/}
                       <FaTelegram className={'h-10 w-10'} />
                   </Link>
               </motion.span>
