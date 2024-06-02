@@ -1,6 +1,5 @@
 "use client";
 import Typewriter from 'typewriter-effect';
-import { FaLinkedin, FaGithub, FaTelegram } from "react-icons/fa6";
 import { motion } from "framer-motion"
 import {useState} from "react";
 import Link from "next/link";
