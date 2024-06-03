@@ -1,17 +1,20 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react"
+import { SpeedInsights } from "@vercel/speed-insights/next"
+
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Aleksandr Shatskikh - full-stack web-developer",
-  description: "Full-stack web-engineer with more than 15 years experience.",
+  title: "Aleksandr Shatskikh - full-stack web-engineer",
+  description: "Full-stack web-developer with more than 15 years experience.",
   authors: [{ name: 'Aleksandr Shatskikh @errand', url: "https://errand.ru" }],
   openGraph: {
     type: "website",
     url: "https://errand.ru",
-    title: "Aleksandr Shatskikh - my site",
+    title: "Aleksandr Shatskikh - full-stack web-engineer",
     description: "Full-stack web-engineer with more than 15 years experience.",
     siteName: "Full-stack web-developer",
     images: [{
@@ -28,6 +31,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>{children}</body>
+      <Analytics/>
+      <SpeedInsights/>
     </html>
   );
 }
