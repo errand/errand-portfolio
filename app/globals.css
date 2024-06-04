@@ -15,10 +15,13 @@
     @apply text-3xl lg:text-7xl font-black mb-2;
   }
   h2, .h2 {
-    @apply text-xl lg:text-5xl uppercase tracking-widest font-thin;
+    @apply text-xl lg:text-5xl uppercase tracking-widest font-thin text-shadow-lg shadow-gray-300 dark:shadow-white;
   }
   .text-balance {
     text-wrap: balance;
+  }
+  .text-gradient {
+    @apply bg-gradient-to-b from-black from-49% via-primary via-50% to-black to-90%
   }
 }
 
