@@ -1,27 +1,112 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
+/* Конфигурация темы теперь указывается здесь */
+@theme {
+  --font-sans: ui-sans-serif, system-ui, sans-serif, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-gray-200: oklch(0.93 0.01 252);
+  --color-gray-300: oklch(0.87 0.02 252);
+  --color-gray-800: oklch(0.27 0.03 256);
+
+  /* Ваш кастомный цвет primary */
+  --color-primary: oklch(0.62 0.22 150);
+
+  --animate-gradient-x: gradient-x 3s ease infinite;
+  --animate-gradient-xy: gradient-xy 3s ease infinite;
+
+  @keyframes gradient-x {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  @keyframes gradient-xy {
+    0%, 100% { background-position: 0% 0%; }
+    50% { background-position: 100% 100%; }
+  }
+}
+
+/* Темная тема */
+@theme dark {
+  --color-background: var(--color-gray-800);
+  --color-foreground: var(--color-gray-50);
+}
 
 @layer base {
+  :root {
+    --background: var(--color-gray-200);
+    --foreground: var(--color-gray-900);
+  }
+
+  .dark {
+    --background: var(--color-gray-800);
+    --foreground: var(--color-gray-50);
+  }
+
   body {
-    @apply bg-gray-200 dark:bg-gray-800 dark:text-gray-50;
+    background: var(--background);
+    color: var(--foreground);
   }
 }
 
 @layer utilities {
-
   h1, .h1 {
-    @apply text-3xl lg:text-7xl font-black mb-2;
+    font-size: 1.875rem; /* text-3xl */
+    line-height: 2.25rem;
+    @media (min-width: 1024px) {
+      font-size: 5rem; /* lg:text-7xl */
+      line-height: 1;
+    }
+    font-weight: 900;
+    margin-bottom: 0.5rem;
   }
+
   h2, .h2 {
-    @apply text-xl lg:text-5xl uppercase tracking-widest font-thin text-shadow-lg shadow-gray-300 dark:shadow-white;
+    font-size: 1.25rem; /* text-xl */
+    line-height: 1.75rem;
+    @media (min-width: 1024px) {
+      font-size: 3rem; /* lg:text-5xl */
+      line-height: 1;
+    }
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 100;
+    text-shadow: 0 0 18px var(--tw-shadow-color);
+    --tw-shadow-color: rgba(209, 213, 219, 0.5); /* shadow-gray-300 */
   }
+
+  .dark h2,
+  .dark .h2 {
+    --tw-shadow-color: rgba(255, 255, 255, 0.5); /* dark:shadow-white */
+  }
+
   .text-balance {
     text-wrap: balance;
   }
+
   .text-gradient {
-    @apply bg-gradient-to-b from-black from-49% via-primary via-50% to-black to-90%
+    background-image: linear-gradient(to bottom,
+    black 49%,
+    var(--color-primary) 50%,
+    black 90%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+
+  /* Плагин text-shadow теперь как утилита */
+  .text-shadow-sm {
+    text-shadow: 0 1px 2px var(--tw-shadow-color);
+  }
+
+  .text-shadow {
+    text-shadow: 0 2px 4px var(--tw-shadow-color);
+  }
+
+  .text-shadow-lg {
+    text-shadow: 0 0 18px var(--tw-shadow-color);
   }
 }
 
