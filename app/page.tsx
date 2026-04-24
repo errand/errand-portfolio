@@ -1,16 +1,48 @@
 "use client";
 import Typewriter from 'typewriter-effect';
 import { motion } from "framer-motion"
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import Link from "next/link";
+import dynamic from "next/dynamic";
+
+const DynamicBackground = dynamic(() => import('@/components/DynamicBackground'), {
+    ssr: false,
+});
+
+const AiSphere = dynamic(() => import('@/components/AiSphere'), {
+    ssr: false,
+});
 
 export default function Home() {
     const [firstTypewriterFinished, setFirstTypewriterFinished] = useState(false);
     const [secondTypewriterFinished, setSecondTypewriterFinished] = useState(false);
+    const [isPageLoaded, setIsPageLoaded] = useState(false);
+
+    useEffect(() => {
+        const onPageLoaded = () => {
+            window.setTimeout(() => setIsPageLoaded(true), 300);
+        };
+
+        if (document.readyState === 'complete') {
+            onPageLoaded();
+            return;
+        }
+
+        window.addEventListener('load', onPageLoaded, { once: true });
+        return () => window.removeEventListener('load', onPageLoaded);
+    }, []);
 
     return (
-        <main className="flex min-h-screen flex-col items-center justify-center p-24">
-            <div className="text-center">
+        <main className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden p-24">
+            <div
+                className="absolute inset-0 transition-opacity duration-1000"
+                style={{ opacity: isPageLoaded ? 1 : 0 }}
+            >
+                <DynamicBackground />
+                <AiSphere />
+            </div>
+
+            <div className="relative z-10 text-center">
                 <div className={'mb-12'}>
                     <Typewriter
                         options={{

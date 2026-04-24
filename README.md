@@ -57,3 +57,16 @@ Or build and run using plain Docker:
 docker build -t errand-portfolio .
 docker run --rm -p 3000:3000 --name errand-portfolio errand-portfolio
 ```
+
+## GitHub Deploy Workflow
+
+Repository includes workflow `.github/workflows/deploy.yml`.
+On push to `main` (or manual trigger), GitHub Actions connects to your server via SSH and runs `scripts/deploy.sh`, which updates git and rebuilds Docker container.
+
+Required GitHub Actions secrets:
+
+- `DEPLOY_HOST` - server hostname or IP
+- `DEPLOY_PORT` - SSH port, for example `22`
+- `DEPLOY_USER` - SSH user
+- `DEPLOY_SSH_KEY` - private SSH key (matching public key on server)
+- `DEPLOY_PATH` - absolute path to project on server (example: `/var/www/errand-portfolio`)
