@@ -1,19 +1,32 @@
-FROM node:24-alpine AS deps
+FROM node:22-alpine AS deps
 WORKDIR /app
 
-COPY package.json package-lock.json ./
-RUN npm install
+ENV NPM_CONFIG_FETCH_RETRIES=8
+ENV NPM_CONFIG_FETCH_RETRY_FACTOR=2
+ENV NPM_CONFIG_FETCH_RETRY_MINTIMEOUT=20000
+ENV NPM_CONFIG_FETCH_RETRY_MAXTIMEOUT=180000
+ENV NPM_CONFIG_FETCH_TIMEOUT=600000
+ENV NPM_CONFIG_REGISTRY=https://registry.npmjs.org/
 
-FROM node:24-alpine AS builder
+COPY package.json package-lock.json ./
+
+# Show npm and node versions for diagnostics
+RUN npm --version && node --version
+
+# Deterministic install
+RUN --mount=type=cache,target=/root/.npm npm ci --no-audit --no-fund
+
+FROM node:22-alpine AS builder
 WORKDIR /app
 
 ENV NEXT_TELEMETRY_DISABLED=1
 
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+
 RUN npm run build
 
-FROM node:24-alpine AS runner
+FROM node:22-alpine AS runner
 WORKDIR /app
 
 ENV NODE_ENV=production

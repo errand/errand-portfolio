@@ -16,7 +16,6 @@
     "delaunator": "^5.1.0",
     "framer-motion": "^12.23.26",
     "next": "16.0.10",
-    "npm": "^11.7.0",
     "poisson-disk-sampling": "^2.3.1",
     "react": "^19",
     "react-dom": "^19",
