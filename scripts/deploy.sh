@@ -24,7 +24,6 @@ git fetch origin "$DEPLOY_BRANCH"
 git checkout "$DEPLOY_BRANCH"
 git pull --ff-only origin "$DEPLOY_BRANCH"
 
-docker compose down
-docker compose up --build -d --remove-orphans
+docker compose up -d --build --remove-orphans
 
 echo "Deploy complete."
